@@ -114,12 +114,12 @@ public enum SwiftyRSA {
     /// - Returns: A touple of a private and public key
     /// - Throws: Throws and error if the tag cant be parsed or if keygeneration fails
     @available(iOS 10.0, watchOS 3.0, tvOS 10.0, *)
-    public static func generateRSAKeyPair(sizeInBits size: Int) throws -> (privateKey: PrivateKey, publicKey: PublicKey) {
+    public static func generateRSAKeyPair(sizeInBits size: Int) throws -> (privateKey: PrivateKey, publicKey: _PublicKey) {
         return try generateRSAKeyPair(sizeInBits: size, applyUnitTestWorkaround: false)
     }
     
     @available(iOS 10.0, watchOS 3.0, tvOS 10.0, *)
-    static func generateRSAKeyPair(sizeInBits size: Int, applyUnitTestWorkaround: Bool = false) throws -> (privateKey: PrivateKey, publicKey: PublicKey) {
+    static func generateRSAKeyPair(sizeInBits size: Int, applyUnitTestWorkaround: Bool = false) throws -> (privateKey: PrivateKey, publicKey: _PublicKey) {
       
         guard let tagData = UUID().uuidString.data(using: .utf8) else {
             throw SwiftyRSAError.stringToDataConversionFailed
@@ -145,7 +145,7 @@ public enum SwiftyRSA {
             throw SwiftyRSAError.keyGenerationFailed(error: error?.takeRetainedValue())
         }
         let privateKey = try PrivateKey(reference: privKey)
-        let publicKey = try PublicKey(reference: pubKey)
+        let publicKey = try _PublicKey(reference: pubKey)
         
         return (privateKey: privateKey, publicKey: publicKey)
     }

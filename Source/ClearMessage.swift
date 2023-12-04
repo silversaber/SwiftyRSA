@@ -53,7 +53,7 @@ public class ClearMessage: Message {
     ///   - padding: Padding to use during the encryption
     /// - Returns: Encrypted message
     /// - Throws: SwiftyRSAError
-    public func encrypted(with key: PublicKey, padding: Padding) throws -> EncryptedMessage {
+    public func encrypted(with key: _PublicKey, padding: Padding) throws -> EncryptedMessage {
         
         let blockSize = SecKeyGetBlockSize(key.reference)
         
@@ -138,7 +138,7 @@ public class ClearMessage: Message {
     ///   - digestType: Digest type used for the signature
     /// - Returns: Result of the verification
     /// - Throws: SwiftyRSAError
-    public func verify(with key: PublicKey, signature: Signature, digestType: Signature.DigestType) throws -> Bool {
+    public func verify(with key: _PublicKey, signature: Signature, digestType: Signature.DigestType) throws -> Bool {
         
         let digest = self.digest(digestType: digestType)
         var digestBytes = [UInt8](repeating: 0, count: digest.count)

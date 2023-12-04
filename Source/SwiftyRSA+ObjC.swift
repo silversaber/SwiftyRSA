@@ -52,7 +52,7 @@ public class _objc_SwiftyRSA: NSObject { // swiftlint:disable:this type_name
 @objc(PublicKey)
 public class _objc_PublicKey: NSObject, Key, ObjcBridgeable { // swiftlint:disable:this type_name
     
-    fileprivate let swiftValue: PublicKey
+    fileprivate let swiftValue: _PublicKey
     
     @objc public var reference: SecKey {
         return swiftValue.reference
@@ -74,36 +74,36 @@ public class _objc_PublicKey: NSObject, Key, ObjcBridgeable { // swiftlint:disab
         return try swiftValue.base64String()
     }
     
-    required public init(swiftValue: PublicKey) {
+    required public init(swiftValue: _PublicKey) {
         self.swiftValue = swiftValue
     }
     
     @objc required public init(data: Data) throws {
-        self.swiftValue = try PublicKey(data: data)
+        self.swiftValue = try _PublicKey(data: data)
     }
     
     @objc public required init(reference: SecKey) throws {
-        self.swiftValue = try PublicKey(reference: reference)
+        self.swiftValue = try _PublicKey(reference: reference)
     }
     
     @objc public required init(base64Encoded base64String: String) throws {
-        self.swiftValue = try PublicKey(base64Encoded: base64String)
+        self.swiftValue = try _PublicKey(base64Encoded: base64String)
     }
     
     @objc public required init(pemEncoded pemString: String) throws {
-        self.swiftValue = try PublicKey(pemEncoded: pemString)
+        self.swiftValue = try _PublicKey(pemEncoded: pemString)
     }
     
     @objc public required init(pemNamed pemName: String, in bundle: Bundle) throws {
-        self.swiftValue = try PublicKey(pemNamed: pemName, in: bundle)
+        self.swiftValue = try _PublicKey(pemNamed: pemName, in: bundle)
     }
     
     @objc public required init(derNamed derName: String, in bundle: Bundle) throws {
-        self.swiftValue = try PublicKey(derNamed: derName, in: bundle)
+        self.swiftValue = try _PublicKey(derNamed: derName, in: bundle)
     }
     
     @objc public static func publicKeys(pemEncoded pemString: String) -> [_objc_PublicKey] {
-        return PublicKey.publicKeys(pemEncoded: pemString).map { _objc_PublicKey(swiftValue: $0) }
+        return _PublicKey.publicKeys(pemEncoded: pemString).map { _objc_PublicKey(swiftValue: $0) }
     }
 }
 
